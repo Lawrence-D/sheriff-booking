@@ -9,23 +9,24 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
+import java.util.List;
 
 public class MinimumSecurityData {
 
     private static MinimumSecurityData instance = new MinimumSecurityData();
-
     private static String fileName = "minSecurity.txt";
-
     private MinimumSecurityBuilding minimumSecurityBuilding;
+    private List<PrisonCell> minimumSecurityCellblock;
     private DateTimeFormatter formatter;
 
     private MinimumSecurityData()
     {
         formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         minimumSecurityBuilding = MinimumSecurityBuilding.getInstance();
-
+        minimumSecurityCellblock = minimumSecurityBuilding.getCellBlock();
     }
 
     public static MinimumSecurityData getInstance()
@@ -33,6 +34,11 @@ public class MinimumSecurityData {
         return instance;
     }
 
+    //temporary until we change this to ObservableList
+    //having issue here
+    public List<PrisonCell> getMinimumSecurityCellblock() {
+        return minimumSecurityCellblock;
+    }
 
     //fix need to keep track of prisoncell num
     //does the minimumsecurity need to populate and then write over itself?
@@ -49,9 +55,17 @@ public class MinimumSecurityData {
 
                 String[] inmate = input.split("\t");
 
+                String firstName = inmate[0];
+                String lastName= inmate[1];
+                String weight= inmate[2];
+                String height = inmate[3];
+                String race = inmate[4];
+                LocalDate bookingDate = LocalDate.parse(inmate[5], formatter);
+                LocalDate courtDate = LocalDate.parse(inmate[6], formatter);
+                LocalDate releaseDate = LocalDate.parse(inmate[7], formatter);
 
-
-
+                //inmate should keep track of bed and cell
+                //minsecurityBuilding should add inmate to correct cell dynamically
 
             }
 
