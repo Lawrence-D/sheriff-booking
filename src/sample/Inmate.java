@@ -5,35 +5,33 @@ import java.time.LocalDate;
 public class Inmate extends Person {
 
 
-//    //minimumSecurity, maximumSecurity, Infirmary
-//    private String cellBlock;
-//
-//    private String cellNumber;
-//
-//    //Bunk A, Bunk B
-//    private String bunk;
     // == Fields ==
+    //minimumSecurity, maximumSecurity, Infirmary
+    private String cellBlock;
+    private int cellNumber;
+
+    //Bunk A, Bunk B
+    private String bunkAssignment;
     private String weight;
     private String height;
     private String race;
 
     //should be automatic at the time of booking
     private LocalDate bookingDate;
-    private LocalDate courtDate;
 
     //can only be edited into the system upon inmate release
     private LocalDate releaseDate;
 
-    public Inmate(String firstName, String lastName, String weight,
-                  String height, String race, LocalDate bookingDate,
-                  LocalDate courtDate, LocalDate releaseDate) {
+    public Inmate( String firstName, String lastName, String weight,
+                  String height, String race,String cellBlock, int cellNumber, String bunkAssignment) {
         super(firstName, lastName);
+        this.cellBlock = cellBlock;
+        this.cellNumber = cellNumber;
+        this.bunkAssignment = bunkAssignment;
         this.weight = weight;
         this.height = height;
         this.race = race;
-        this.bookingDate = bookingDate;
-        this.courtDate = courtDate;
-        this.releaseDate = releaseDate;
+        this.bookingDate = LocalDate.now();
     }
 
     @Override
@@ -54,6 +52,30 @@ public class Inmate extends Person {
     @Override
     public void setLastName(String lastName) {
         super.setLastName(lastName);
+    }
+
+    public String getCellBlock() {
+        return cellBlock;
+    }
+
+    public void setCellBlock(String cellBlock) {
+        this.cellBlock = cellBlock;
+    }
+
+    public int getCellNumber() {
+        return cellNumber;
+    }
+
+    public void setCellNumber(int cellNumber) {
+        this.cellNumber = cellNumber;
+    }
+
+    public String getBunkAssignment() {
+        return bunkAssignment;
+    }
+
+    public void setBunkAssignment(String bunkAssignment) {
+        this.bunkAssignment = bunkAssignment;
     }
 
     public String getWeight() {
@@ -88,14 +110,6 @@ public class Inmate extends Person {
         this.bookingDate = bookingDate;
     }
 
-    public LocalDate getCourtDate() {
-        return courtDate;
-    }
-
-    public void setCourtDate(LocalDate courtDate) {
-        this.courtDate = courtDate;
-    }
-
     public LocalDate getReleaseDate() {
         return releaseDate;
     }
@@ -111,7 +125,6 @@ public class Inmate extends Person {
                 "Height: " + height + "\n" +
                 "Race: " + race + "\n" +
                 "Booking Date: " + bookingDate + "\n" +
-                "Court Date: " + courtDate + "\n" +
                 "Release Date: " + releaseDate;
     }
 }

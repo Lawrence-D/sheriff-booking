@@ -5,11 +5,14 @@ import java.util.List;
 
 public class MinimumSecurityBuilding extends Building{
 
+    /*might need to populate prison cells upon creation and set cell nums from this class*/
+
     private static MinimumSecurityBuilding  minimumSecurityBuilding = null;
     private List<PrisonCell> cellBlock;
 
     private MinimumSecurityBuilding(){
         cellBlock = new ArrayList<>();
+        createPrisonCells();
 
         //populate cellblocks with for loop
     }
@@ -33,6 +36,16 @@ public class MinimumSecurityBuilding extends Building{
             }
         }
         return false;
+    }
+
+    @Override
+    public void createPrisonCells() {
+
+    }
+
+    @Override
+    public void assignToPrisonCell(Inmate inmate) {
+
     }
 
     @Override

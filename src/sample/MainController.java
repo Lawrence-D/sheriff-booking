@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -13,6 +14,10 @@ public class MainController {
     //Windows
     @FXML
     private GridPane bookingPane;
+
+    //find action method to click on menu items
+    @FXML
+    private MenuItem menuBookInmate;
 
     //buttons
     @FXML

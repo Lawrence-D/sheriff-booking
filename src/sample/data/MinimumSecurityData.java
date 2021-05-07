@@ -99,7 +99,6 @@ public class MinimumSecurityData {
                         prisonCell.getBunkA().getHeight(),
                         prisonCell.getBunkA().getRace(),
                         prisonCell.getBunkA().getBookingDate(),
-                        prisonCell.getBunkA().getCourtDate(),
                         prisonCell.getBunkA().getReleaseDate()
                         ));
                 bw.newLine();
@@ -111,7 +110,6 @@ public class MinimumSecurityData {
                         prisonCell.getBunkB().getHeight(),
                         prisonCell.getBunkB().getRace(),
                         prisonCell.getBunkB().getBookingDate(),
-                        prisonCell.getBunkB().getCourtDate(),
                         prisonCell.getBunkB().getReleaseDate()
                 ));
                 bw.newLine();

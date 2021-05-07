@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -33,8 +32,6 @@ public class BookingController {
     private Spinner<Integer> weight;
     @FXML
     private ComboBox<String> height;
-    @FXML
-    private DatePicker courtDate;
 
     //Race and ethnicity checkBox form values
     @FXML
@@ -129,14 +126,14 @@ public class BookingController {
                         {
                             //fix bunk value
                             Inmate newInmate = new Inmate(firstName.getText(),lastName.getText(), Integer.toString(weight.getValue()), height.getValue(),
-                                    getRaceEthnicityString(), cellBlockListView.getValue(), prisonCellListView.getValue(),bunkListView.getValue(), courtDate.getValue());
+                                    getRaceEthnicityString(), cellBlockListView.getValue(), Integer.parseInt(prisonCellListView.getValue()), bunkListView.getValue());
 
                             showConfirmationDialog(newInmate);
                             break;
                         }else if(bunkListView.getValue() == "Bunk B")
                         {
-                            Inmate newInmate = new Inmate(firstName.getText(),lastName.getText(),Integer.toString(weight.getValue()),height.getValue(),
-                                    getRaceEthnicityString(), cellBlockListView.getValue(), prisonCellListView.getValue(), bunkListView.getValue(), courtDate.getValue());
+                            Inmate newInmate = new Inmate(firstName.getText(),lastName.getText(), Integer.toString(weight.getValue()), height.getValue(),
+                                    getRaceEthnicityString(), cellBlockListView.getValue(), Integer.parseInt(prisonCellListView.getValue()), bunkListView.getValue());
 
                             showConfirmationDialog(newInmate);
                             break;
@@ -204,18 +201,6 @@ public class BookingController {
             errors += num + ". Height is missing.\n";
         }
 
-        if(courtDate.getValue() == null){
-            num++;
-            errors += num + ". Court date is missing.\n";
-        }
-
-        if (courtDate.getValue()!= null && (courtDate.getValue().isBefore(LocalDate.now())
-                || courtDate.getValue().isEqual(LocalDate.now()))){
-
-            num++;
-            errors += num + ". Court date needs to be after today's date.\n";
-
-        }
 
         if(cellBlockListView.getValue() == null) {
             errors += ((++num) + ". PrisonCell block needs to be selected.\n" +

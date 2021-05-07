@@ -94,15 +94,6 @@
 
     </VBox>
 
-    <VBox GridPane.rowIndex="2" GridPane.columnIndex="0" spacing="5">
-        <padding>
-            <Insets top="20"/>
-        </padding>
-
-        <Label text="Court date:"/>
-        <DatePicker fx:id="courtDate"/>
-    </VBox>
-
     <VBox GridPane.rowIndex="3" GridPane.columnIndex="0" spacing="5">
     <padding>
         <Insets top="20"/>
