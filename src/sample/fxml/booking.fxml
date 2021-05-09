@@ -27,115 +27,118 @@
         </Label>
     </HBox>
 
-    <VBox GridPane.rowIndex="1" GridPane.columnIndex="0" spacing="5">
-        <padding>
-            <Insets top="20"/>
-        </padding>
+    <HBox GridPane.rowIndex="1">
+        <VBox GridPane.columnIndex="0" spacing="5">
+            <padding>
+                <Insets top="20"/>
+            </padding>
 
-        <Label text="First name:"/>
-        <TextField fx:id="firstName"></TextField>
+            <Label text="First name:"/>
+            <TextField fx:id="firstName"/>
 
-        <Label text="Height:"/>
-        <ComboBox fx:id="height">
-            <items>
-                <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="5'0''"></String>
-                    <String fx:value="5'1''"></String>
-                    <String fx:value="5'2''"></String>
-                    <String fx:value="5'3''"></String>
-                    <String fx:value="5'4''"></String>
-                    <String fx:value="5'5''"></String>
-                    <String fx:value="5'6''"></String>
-                    <String fx:value="5'7''"></String>
-                    <String fx:value="5'8''"></String>
-                    <String fx:value="5'9''"></String>
-                    <String fx:value="5'10''"></String>
-                    <String fx:value="5'11''"></String>
-                    <String fx:value="6'0''"></String>
-                    <String fx:value="6'1''"></String>
-                    <String fx:value="6'2''"></String>
-                    <String fx:value="6'3''"></String>
-                    <String fx:value="6'4''"></String>
-                    <String fx:value="6'5''"></String>
-                    <String fx:value="6'6''"></String>
-                    <String fx:value="6'7''"></String>
-                    <String fx:value="6'8''"></String>
-                    <String fx:value="6'9''"></String>
-                    <String fx:value="6'10''"></String>
-                    <String fx:value="6'11''"></String>
-                    <String fx:value="7'0''"></String>
-                    <String fx:value="7'1''"></String>
-                    <String fx:value="7'2''"></String>
-                    <String fx:value="7'3''"></String>
-                    <String fx:value="7'4''"></String>
-                    <String fx:value="7'5''"></String>
-                    <String fx:value="7'6''"></String>
-                    <String fx:value="7'7''"></String>
-                    <String fx:value="7'8''"></String>
-                    <String fx:value="7'9''"></String>
-                    <String fx:value="7'10''"></String>
-                    <String fx:value="7'11''"></String>
-                    <String fx:value="8'0''"></String>
-                </FXCollections>
-            </items>
-        </ComboBox>
-    </VBox>
+            <Label text="Height:"/>
+            <ComboBox fx:id="height">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="5'0''"></String>
+                        <String fx:value="5'1''"></String>
+                        <String fx:value="5'2''"></String>
+                        <String fx:value="5'3''"></String>
+                        <String fx:value="5'4''"></String>
+                        <String fx:value="5'5''"></String>
+                        <String fx:value="5'6''"></String>
+                        <String fx:value="5'7''"></String>
+                        <String fx:value="5'8''"></String>
+                        <String fx:value="5'9''"></String>
+                        <String fx:value="5'10''"></String>
+                        <String fx:value="5'11''"></String>
+                        <String fx:value="6'0''"></String>
+                        <String fx:value="6'1''"></String>
+                        <String fx:value="6'2''"></String>
+                        <String fx:value="6'3''"></String>
+                        <String fx:value="6'4''"></String>
+                        <String fx:value="6'5''"></String>
+                        <String fx:value="6'6''"></String>
+                        <String fx:value="6'7''"></String>
+                        <String fx:value="6'8''"></String>
+                        <String fx:value="6'9''"></String>
+                        <String fx:value="6'10''"></String>
+                        <String fx:value="6'11''"></String>
+                        <String fx:value="7'0''"></String>
+                        <String fx:value="7'1''"></String>
+                        <String fx:value="7'2''"></String>
+                        <String fx:value="7'3''"></String>
+                        <String fx:value="7'4''"></String>
+                        <String fx:value="7'5''"></String>
+                        <String fx:value="7'6''"></String>
+                        <String fx:value="7'7''"></String>
+                        <String fx:value="7'8''"></String>
+                        <String fx:value="7'9''"></String>
+                        <String fx:value="7'10''"></String>
+                        <String fx:value="7'11''"></String>
+                        <String fx:value="8'0''"></String>
+                    </FXCollections>
+                </items>
+            </ComboBox>
+        </VBox>
 
-    <VBox GridPane.rowIndex="1" GridPane.columnIndex="1" spacing="5">
-        <padding>
-            <Insets top="20" left="35"/>
-        </padding>
+        <VBox GridPane.columnIndex="1" spacing="5">
+            <padding>
+                <Insets top="20" left="50"/>
+            </padding>
 
-        <Label text="Last name:"/>
-        <TextField fx:id="lastName"></TextField>
+            <Label text="Last name:"/>
+            <TextField fx:id="lastName"></TextField>
 
-        <Label text="Weight:"/>
-        <Spinner fx:id="weight" min="120" max="400" editable="true" initialValue="160"/>
+            <Label text="Weight:"/>
+            <Spinner fx:id="weight" min="120" max="400" editable="true" initialValue="160"/>
+        </VBox>
+    </HBox>
 
-    </VBox>
+    <HBox GridPane.rowIndex="3" spacing="10">
+        <VBox GridPane.columnIndex="0">
+            <padding>
+                <Insets top="20"/>
+            </padding>
 
-    <VBox GridPane.rowIndex="3" GridPane.columnIndex="0" spacing="5">
-    <padding>
-        <Insets top="20"/>
-    </padding>
+            <Label text="Cell Block"/>
+            <ComboBox fx:id="cellBlockListView" onAction="#onComboBoxClicked">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Minimum Security"></String>
+                    </FXCollections>
+                </items>
+            </ComboBox>
+        </VBox>
 
-    <Label text="Cell Block"/>
-    <ComboBox fx:id="cellBlockListView" onAction="#onComboBoxClicked">
-        <items>
-            <FXCollections fx:factory="observableArrayList">
-                <String fx:value="Minimum Security"></String>
-            </FXCollections>
-        </items>
-    </ComboBox>
-    </VBox>
+        <VBox GridPane.columnIndex="1">
+            <padding>
+                <Insets top="20"/>
+            </padding>
 
-    <VBox GridPane.rowIndex="3" GridPane.columnIndex="1" spacing="5" >
-        <padding>
-            <Insets top="20"/>
-        </padding>
+            <Label text="Cell Number"/>
+            <ComboBox fx:id="prisonCellListView" onAction="#onComboBoxClicked" style="-fx-pref-width: 85">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                    </FXCollections>
+                </items>
+            </ComboBox>
+        </VBox>
 
-        <Label text="Cell Number"/>
-        <ComboBox fx:id="prisonCellListView" onAction="#onComboBoxClicked" style="-fx-pref-width: 85">
-            <items>
-                <FXCollections fx:factory="observableArrayList">
-                </FXCollections>
-            </items>
-        </ComboBox>
-    </VBox>
+        <VBox GridPane.columnIndex="2">
+            <padding>
+                <Insets top="20"/>
+            </padding>
 
-    <VBox GridPane.rowIndex="3" GridPane.columnIndex="2" spacing="5">
-        <padding>
-            <Insets top="20"/>
-        </padding>
-
-        <Label text="Bunk Assignment"/>
-        <ComboBox fx:id="bunkListView" onAction="#onComboBoxClicked" style="-fx-pref-width: 85">
-            <items>
-                <FXCollections fx:factory="observableArrayList">
-                </FXCollections>
-            </items>
-        </ComboBox>
-    </VBox>
+            <Label text="Bunk Assignment"/>
+            <ComboBox fx:id="bunkListView" onAction="#onComboBoxClicked" style="-fx-pref-width: 100">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                    </FXCollections>
+                </items>
+            </ComboBox>
+        </VBox>
+    </HBox>
 
     <VBox GridPane.rowIndex="4" GridPane.columnIndex="0" GridPane.columnSpan="3" spacing="10">
         <padding>
@@ -146,19 +149,20 @@
         <HBox spacing="10">
             <VBox spacing="10">
                 <CheckBox fx:id="americanNative" text="American Indian or Alaskan Native"/>
-                <CheckBox fx:id="asian" text="Asian"/>
                 <CheckBox fx:id="black" text="Black or African American"/>
+                <CheckBox fx:id="pacificIslander" text="Native Hawaiian or Other Pacific Islander"/>
+
             </VBox>
 
             <VBox spacing="10">
-                <CheckBox fx:id="latino" text="Hispanic or Latino"/>
-                <CheckBox fx:id="pacificIslander" text="Native Hawaiian or Other Pacific Islander"/>
+                <CheckBox fx:id="asian" text="Asian"/>
                 <CheckBox fx:id="white" text="White"/>
+                <CheckBox fx:id="latino" text="Hispanic or Latino"/>
             </VBox>
         </HBox>
     </VBox>
 
-    <HBox GridPane.rowIndex="5" GridPane.columnIndex="3">
+    <HBox GridPane.rowIndex="5" GridPane.columnIndex="0">
         <padding>
             <Insets top="20"/>
         </padding>
@@ -168,4 +172,5 @@
             </font>
         </Button>
     </HBox>
+
 </GridPane>

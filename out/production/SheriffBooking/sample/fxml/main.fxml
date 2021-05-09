@@ -19,15 +19,11 @@
         <VBox>
             <MenuBar>
                 <Menu text="File">
-                    <items>
-                        <MenuItem text="Book Inmate"/>
-                        <SeparatorMenuItem/>
-                        <MenuItem text="Move Inmate"/>
-                        <SeparatorMenuItem/>
-                        <MenuItem text="Admit Visitor"/>
-                        <SeparatorMenuItem/>
-                        <MenuItem text="Exit"/>
-                    </items>
+                    <MenuItem onAction="#bookingScreen" text="Book Inmate"/>
+                    <SeparatorMenuItem/>
+                    <MenuItem text="Move Inmate"/>
+                    <SeparatorMenuItem/>
+                    <MenuItem onAction="#exitProgram" text="Exit"/>
                 </Menu>
             </MenuBar>
             <HBox spacing="5" alignment="CENTER">
@@ -39,6 +35,7 @@
     </top>
 
     <left>
+        <!--Change to drop down with different choices for types of inmates to populate the small window-->
         <VBox alignment="CENTER">
             <Label text="Minimum Security Inmates">
                 <font>

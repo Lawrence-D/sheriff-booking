@@ -6,18 +6,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class MainController {
     //Windows
     @FXML
     private GridPane bookingPane;
-
-    //find action method to click on menu items
-    @FXML
-    private MenuItem menuBookInmate;
 
     //buttons
     @FXML
@@ -29,18 +26,37 @@ public class MainController {
     @FXML
     private Button credits;
 
+
     @FXML
-    public void onButtonClicked(ActionEvent e) throws Exception
-    {
+    public void onButtonClicked(ActionEvent e) throws Exception {
         Stage stage  = new Stage();
 
         if(e.getSource().equals(bookInmate))
         {
             Parent root = FXMLLoader.load(getClass().getResource("fxml/booking.fxml"));
             stage.setTitle("Sheriff Office Booking System");
-            stage.setScene(new Scene(root, 600, 490));
+            stage.setScene(new Scene(root, 450, 425));
         }
 
         stage.show();
     }
+
+
+    @FXML
+    public void bookingScreen() throws IOException {
+        Stage stage  = new Stage();
+
+        Parent root = FXMLLoader.load(getClass().getResource("fxml/booking.fxml"));
+        stage.setTitle("Sheriff Office Booking System");
+        stage.setScene(new Scene(root, 465, 425));
+
+        stage.show();
+    }
+
+    @FXML
+    public void exitProgram() {
+        System.exit(0);
+    }
+
+
 }

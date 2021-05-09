@@ -19,11 +19,11 @@
         <VBox>
             <MenuBar>
                 <Menu text="File">
-                    <MenuItem fx:id="menuBookInmate" text="Book Inmate"/>
+                    <MenuItem onAction="#bookingScreen" text="Book Inmate"/>
                     <SeparatorMenuItem/>
                     <MenuItem text="Move Inmate"/>
                     <SeparatorMenuItem/>
-                    <MenuItem text="Exit"/>
+                    <MenuItem onAction="#exitProgram" text="Exit"/>
                 </Menu>
             </MenuBar>
             <HBox spacing="5" alignment="CENTER">
