@@ -2,7 +2,7 @@ package sample;
 
 public class PrisonCell {
 
-    private int cellNumVal = 1;
+    private static int cellNumVal = 1;
     private int cellNumber;
     private Inmate bunkA;
     private Inmate bunkB ;

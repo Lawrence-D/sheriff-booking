@@ -1,6 +1,7 @@
 package sample;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Inmate extends Person {
 
@@ -14,7 +15,7 @@ public class Inmate extends Person {
     private String bunkAssignment;
     private String weight;
     private String height;
-    private String race;
+    private List<String> race;
 
     //should be automatic at the time of booking
     private LocalDate bookingDate;
@@ -23,7 +24,7 @@ public class Inmate extends Person {
     private LocalDate releaseDate;
 
     public Inmate( String firstName, String lastName, String weight,
-                  String height, String race,String cellBlock, int cellNumber, String bunkAssignment) {
+                  String height, List<String> race,String cellBlock, int cellNumber, String bunkAssignment) {
         super(firstName, lastName);
         this.cellBlock = cellBlock;
         this.cellNumber = cellNumber;
@@ -32,6 +33,19 @@ public class Inmate extends Person {
         this.height = height;
         this.race = race;
         this.bookingDate = LocalDate.now();
+    }
+
+    //For reading from a file
+    public Inmate( String firstName, String lastName, String weight,
+                   String height, List<String> race,String cellBlock, int cellNumber, String bunkAssignment, LocalDate bookingDate) {
+        super(firstName, lastName);
+        this.cellBlock = cellBlock;
+        this.cellNumber = cellNumber;
+        this.bunkAssignment = bunkAssignment;
+        this.weight = weight;
+        this.height = height;
+        this.race = race;
+        this.bookingDate = bookingDate;
     }
 
     @Override
@@ -94,12 +108,29 @@ public class Inmate extends Person {
         this.height = height;
     }
 
-    public String getRace() {
+    public List<String> getRace() {
         return this.race;
     }
 
-    public void setRace(String race) {
+    public void setRace(List<String> race) {
         this.race = race;
+    }
+
+    //Used by toString method to show race/races of inmate
+    public String showRace(){
+
+        String allRaces = "";
+
+        for(int i=0; i < race.size(); i++){
+
+            if(i == (race.size()-1)){
+                allRaces += (race.get(i));
+            }else{
+                allRaces += (race.get(i) + ", ");
+            }
+        }
+
+        return allRaces;
     }
 
     public LocalDate getBookingDate() {
@@ -114,6 +145,7 @@ public class Inmate extends Person {
         return releaseDate;
     }
 
+    //Can't be less than booking date
     public void setReleaseDate(LocalDate releaseDate) {
         this.releaseDate = releaseDate;
     }
@@ -121,10 +153,10 @@ public class Inmate extends Person {
     @Override
     public String toString() {
         return "Name: " + getFirstName() + " " + getLastName() + "\n" +
-                "Weight: " + weight + "\n" +
-                "Height: " + height + "\n" +
-                "Race: " + race + "\n" +
-                "Booking Date: " + bookingDate + "\n" +
-                "Release Date: " + releaseDate;
+                "Weight: " + this.weight + "\n" +
+                "Height: " + this.height + "\n" +
+                "Race: " + showRace() + "\n" +
+                "Booking Date: " + this.bookingDate + "\n" +
+                "Release Date: " + this.releaseDate;
     }
 }

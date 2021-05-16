@@ -26,7 +26,7 @@ public class MinimumSecurityBuilding extends Building{
     @Override
     public boolean addInmate(Inmate inmate) {
 
-        if((cellBlock != null) && (cellBlock.size() <= RoomLimit.MAXIMUM_SECURITY_SIZE.getNumberOfRooms())){
+        if((cellBlock != null) && (cellBlock.size() <= RoomLimit.MINIMUM_SECURITY_SIZE.getNumberOfRooms())){
             for(PrisonCell prisonCell: cellBlock){
                 if(!inmate.equals(prisonCell.getBunkA())){
                     return prisonCell.addToBunkA(inmate);
@@ -38,9 +38,13 @@ public class MinimumSecurityBuilding extends Building{
         return false;
     }
 
+    //populates the cellblock with prison cells
     @Override
     public void createPrisonCells() {
 
+        for(int i=0; i < RoomLimit.MINIMUM_SECURITY_SIZE.getNumberOfRooms(); i++){
+            cellBlock.add(new PrisonCell());
+        }
     }
 
     @Override

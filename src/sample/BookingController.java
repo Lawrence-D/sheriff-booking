@@ -15,6 +15,9 @@ public class BookingController {
     @FXML
     List<PrisonCell> minSecurity;
 
+    @FXML
+    MinimumSecurityBuilding minimumSecurityBuilding;
+
     //ListViews for ComboBox's
     @FXML
     private ComboBox<String> cellBlockListView;
@@ -64,12 +67,7 @@ public class BookingController {
 
     public void initialize()
     {
-        minSecurity = new ArrayList<>();
-
-        for(int i=0; i < 10; i++)
-        {
-            minSecurity.add(new PrisonCell());
-        }
+        minimumSecurityBuilding = MinimumSecurityBuilding.getInstance();
 
         //initialize cell number and bunks to not available
         //prisonCellListView.getItems().add("N/A");
@@ -88,10 +86,10 @@ public class BookingController {
             {
                 System.out.println(minSecurityString);
                 //populates cell combo box listview
-                prisonCellListView.getItems().setAll(createCellList(minSecurity));
+
+                prisonCellListView.getItems().setAll(createCellList(minimumSecurityBuilding.getCellBlock()));
             }
         }
-
 
         if(e.getSource().equals(prisonCellListView))
         {
@@ -113,9 +111,8 @@ public class BookingController {
                 showErrorDialog(getErrorString());
             }else{
 
-                //currently minsecurity could be expanded
                 //assigns inmate to a call and bunk
-                for(PrisonCell prisonCell : minSecurity)
+                for(PrisonCell prisonCell : minimumSecurityBuilding.getCellBlock())
                 {
                     System.out.println("cellNum = " + prisonCell.getCellNumber());
                     System.out.println("prisonCellListView = " + prisonCellListView.getValue());
@@ -219,7 +216,7 @@ public class BookingController {
             errors += num + ". Bunk needs to be selected.\n";
         }
 
-        if(getRaceEthnicityString().isEmpty() || getRaceEthnicityString().isBlank())
+        if(getRaceEthnicityString().isEmpty())
         {
             num++;
             errors += num + ". Race and ethnicity needs to be selected.\n";
@@ -229,22 +226,22 @@ public class BookingController {
     }
 
     //Combines selections from various checkBoxes
-    public String getRaceEthnicityString()
+    public List<String> getRaceEthnicityString()
     {
-        String raceEthnicity = "";
+        List<String> raceEthnicity = new ArrayList<>();
 
         if(americanNative.isSelected())
-            raceEthnicity += (americanNative.getText() + "\t");
+            raceEthnicity.add(americanNative.getText());
         if(asian.isSelected())
-            raceEthnicity += (asian.getText() + "\t");
+            raceEthnicity.add(asian.getText());
         if(black.isSelected())
-            raceEthnicity += (black.getText() + "\t");
+            raceEthnicity.add(black.getText());
         if(latino.isSelected())
-            raceEthnicity += (latino.getText() + "\t");
+            raceEthnicity.add(latino.getText());
         if(pacificIslander.isSelected())
-            raceEthnicity += (pacificIslander.getText() + "\t");
+            raceEthnicity.add(pacificIslander.getText());
         if(white.isSelected())
-            raceEthnicity += (white.getText() + "\t");
+            raceEthnicity.add(white.getText());
 
         return raceEthnicity;
     }
@@ -261,14 +258,14 @@ public class BookingController {
         return cellList;
     }
 
-    //returns a list of bunks Bunk A and/or Bunk B
+    //returns a list of available, bunks Bunk A and/or Bunk B
     public List<String> createBunkList(String cellNum, String cellBlockString)
     {
         List<String> bunkList = new ArrayList<>();
 
         if(cellBlockString.equals("Minimum Security"))
         {
-            for(PrisonCell prisonCell : minSecurity)
+            for(PrisonCell prisonCell : minimumSecurityBuilding.getCellBlock())
             {
                 if(("" + prisonCell.getCellNumber()).equals(cellNum))
                 {
