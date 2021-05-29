@@ -38,7 +38,7 @@ public class PrisonCell {
     }
 
     public boolean hasAvailableBunks(){
-        return getBunkA() != null || getBunkB() != null;
+        return getBunkA() == null || getBunkB() == null;
     }
 
 

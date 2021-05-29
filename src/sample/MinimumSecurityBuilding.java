@@ -21,17 +21,21 @@ public class MinimumSecurityBuilding extends Building{
         return cellBlock;
     }
 
-    //add to PrisonCell
-    //add to first cell and then first bed available
     @Override
     public boolean addInmate(Inmate inmate) {
 
+        boolean isAvailableBunks;
+
         if((cellBlock != null) && (cellBlock.size() <= RoomLimit.MINIMUM_SECURITY_SIZE.getNumberOfRooms())){
-            for(PrisonCell prisonCell: cellBlock){
-                if(!inmate.equals(prisonCell.getBunkA())){
-                    return prisonCell.addToBunkA(inmate);
-                }else if(!inmate.equals(prisonCell.getBunkB())){
-                    return prisonCell.addToBunkB(inmate);
+
+            isAvailableBunks = cellBlock.get(inmate.getCellNumber()-1).hasAvailableBunks();
+
+            if(isAvailableBunks){
+
+                if(inmate.getBunkAssignment().equals("A")){
+                    return cellBlock.get(inmate.getCellNumber()-1).addToBunkA(inmate);
+                }else if(inmate.getBunkAssignment().equals("B")){
+                    return cellBlock.get(inmate.getCellNumber()-1).addToBunkB(inmate);
                 }
             }
         }
@@ -45,11 +49,6 @@ public class MinimumSecurityBuilding extends Building{
         for(int i=0; i < RoomLimit.MINIMUM_SECURITY_SIZE.getNumberOfRooms(); i++){
             cellBlock.add(new PrisonCell());
         }
-    }
-
-    @Override
-    public void assignToPrisonCell(Inmate inmate) {
-
     }
 
     @Override
@@ -69,7 +68,7 @@ public class MinimumSecurityBuilding extends Building{
     //add first to new cell then remove from old cell location
     @Override
     public boolean moveInmate(Inmate inmate, int cellMoveNumber) {
-        boolean isAddedToCell = false;
+        boolean isAddedToCell;
         for(PrisonCell prisonCell: cellBlock){
             if(cellMoveNumber == prisonCell.getCellNumber()){
                 isAddedToCell = prisonCell.addToCell(inmate);

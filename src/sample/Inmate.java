@@ -156,6 +156,9 @@ public class Inmate extends Person {
                 "Weight: " + this.weight + "\n" +
                 "Height: " + this.height + "\n" +
                 "Race: " + showRace() + "\n" +
+                "Cell Block: " + this.cellBlock + "\n" +
+                "Cell Number: " + this.cellNumber + "\n" +
+                "Bunk Assignment: " + this.bunkAssignment + "\n" +
                 "Booking Date: " + this.bookingDate + "\n" +
                 "Release Date: " + this.releaseDate;
     }

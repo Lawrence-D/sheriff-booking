@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,9 +12,6 @@ import java.util.Optional;
 
 public class BookingController {
 
-
-    @FXML
-    List<PrisonCell> minSecurity;
 
     @FXML
     MinimumSecurityBuilding minimumSecurityBuilding;
@@ -64,14 +62,13 @@ public class BookingController {
     @FXML
     Label errorText;
 
+    //boolean for confirming inmate details are accurate
+    private boolean isConfirmed = false;
+
 
     public void initialize()
     {
         minimumSecurityBuilding = MinimumSecurityBuilding.getInstance();
-
-        //initialize cell number and bunks to not available
-        //prisonCellListView.getItems().add("N/A");
-        //bunkListView.getItems().add("N/A");
 
     }
 
@@ -104,6 +101,7 @@ public class BookingController {
     @FXML
     public void onSubmitButtonClicked(ActionEvent e)
     {
+
         if(e.getSource().equals(submitButton))
         {
             if(!getErrorString().isBlank() || !getErrorString().isEmpty()){
@@ -114,20 +112,19 @@ public class BookingController {
                 //assigns inmate to a call and bunk
                 for(PrisonCell prisonCell : minimumSecurityBuilding.getCellBlock())
                 {
-                    System.out.println("cellNum = " + prisonCell.getCellNumber());
-                    System.out.println("prisonCellListView = " + prisonCellListView.getValue());
-                    if(prisonCellListView.getValue().equals(Integer.toString(prisonCell.getCellNumber()))) //error here
+
+                    if(prisonCellListView.getValue().equals(Integer.toString(prisonCell.getCellNumber())))
                     {
-                        System.out.println("CellNum's match");
-                        if(bunkListView.getValue().equals("Bunk A"))
+
+                        if(bunkListView.getValue().equals("A")) //Bunk A
                         {
-                            //fix bunk value
                             Inmate newInmate = new Inmate(firstName.getText(),lastName.getText(), Integer.toString(weight.getValue()), height.getValue(),
                                     getRaceEthnicityString(), cellBlockListView.getValue(), Integer.parseInt(prisonCellListView.getValue()), bunkListView.getValue());
 
                             showConfirmationDialog(newInmate);
                             break;
-                        }else if(bunkListView.getValue() == "Bunk B")
+
+                        }else if(bunkListView.getValue().equals("B")) //Bunk B
                         {
                             Inmate newInmate = new Inmate(firstName.getText(),lastName.getText(), Integer.toString(weight.getValue()), height.getValue(),
                                     getRaceEthnicityString(), cellBlockListView.getValue(), Integer.parseInt(prisonCellListView.getValue()), bunkListView.getValue());
@@ -137,8 +134,12 @@ public class BookingController {
                         }
                     }
                 }
-                
-                //confirmation dialogue window
+
+                if(isConfirmed){
+                    Stage stage = (Stage) submitButton.getScene().getWindow();
+                    stage.close();
+                }
+
             }
         }
     }
@@ -158,10 +159,8 @@ public class BookingController {
         }
     }
 
-    //not reaching this method
     public void showConfirmationDialog(Inmate inmate)
     {
-        System.out.println("Inside Show Confirmation Dialog");
         Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
         confirmationAlert.setTitle("Confirmation");
         confirmationAlert.setHeaderText(inmate.toString());
@@ -170,11 +169,20 @@ public class BookingController {
         Optional<ButtonType> result = confirmationAlert.showAndWait();
 
         if(result.isPresent() && (result.get() == ButtonType.OK)) {
-            //boolean inmateAdded = cell.setBunkA(inmate);
+
+            //add check if inmate exist already functionality
+            boolean inmateAdded = minimumSecurityBuilding.addInmate(inmate);
+
+            if(inmateAdded){
+                isConfirmed = true;
+
+                confirmationAlert.close();
+                //add success dialog later
+            }
+
         }else if(result.isPresent() && (result.get() == ButtonType.CANCEL)) {
             confirmationAlert.close();
         }
-
     }
 
     //Combines any errors into a String
@@ -205,12 +213,12 @@ public class BookingController {
                     (++num) + ". Bunk needs to be selected.\n");
         }
 
-        if(cellBlockListView.getValue() != null && (prisonCellListView.getValue() == null || prisonCellListView.getValue() == "N/A")){
+        if(cellBlockListView.getValue() != null && (prisonCellListView.getValue() == null || prisonCellListView.getValue().equals("N/A"))){
             num++;
             errors += num + ". PrisonCell number needs to be selected.\n";
         }
 
-        if(prisonCellListView.getValue() != null && (bunkListView.getValue() == null || bunkListView.getValue() == "N/A"))
+        if(prisonCellListView.getValue() != null && (bunkListView.getValue() == null || bunkListView.getValue().equals("N/A")))
         {
             num++;
             errors += num + ". Bunk needs to be selected.\n";
@@ -270,11 +278,11 @@ public class BookingController {
                 if(("" + prisonCell.getCellNumber()).equals(cellNum))
                 {
                     if(prisonCell.getBunkA() == null) {
-                        bunkList.add("Bunk A");
+                        bunkList.add("A");
                     }
 
                     if(prisonCell.getBunkB() == null) {
-                        bunkList.add("Bunk B");
+                        bunkList.add("B");
                     }
 
                     if(bunkList.isEmpty()){
